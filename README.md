@@ -1,11 +1,23 @@
-# ECG Signal Cleaner
+# Interactive ECG Signal Processor & QRS Detector
 
-Este repositorio contiene un pipeline en Python para la limpieza y procesamiento de señales electrocardiográficas (ECG) crudas obtenidas potencialmente de dispositivos wearables.
+A Python-based digital signal processing (DSP) pipeline and interactive dashboard designed to clean raw electrocardiogram (ECG) data and detect cardiac events in real-time.
 
-## 🔬 Justificación Clínica
-Las señales de biopotenciales suelen verse contaminadas por artefactos de alta frecuencia (temblores musculares o interferencia de red a 50/60 Hz) y bajas frecuencias (vaivén de la respiración o cambios de posición del sensor). Este script aplica un filtro pasabanda Butterworth (0.5 - 45 Hz) diseñado para preservar el complejo QRS y aislar los picos R para el posterior análisis de HRV.
+## 🔬 Clinical Context & Rationale
+Biopotential signals collected from wearable devices are highly susceptible to physiological and environmental noise. This repository addresses two major clinical artifacts:
+1. **Baseline Wander (< 0.5 Hz):** Caused by patient respiration, thermal drift, and body movement.
+2. **High-Frequency Noise (> 40 Hz):** Dominated by electromyographic (EMG) interference from muscle tremors and 50/60 Hz powerline grid interference.
 
-## 🛠️ Instalación
+The core algorithm applies a zero-phase **Butterworth Bandpass Filter** to isolate the specific frequency spectrum of the ventricular depolarization (**QRS complex**), followed by a prominence-based peak detection algorithm to isolate R-peaks for subsequent Heart Rate Variability (HRV) analysis.
+
+## 🛠️ Technical Stack
+* **Language:** Python 3.9+
+* **DSP Framework:** `SciPy` (Signal module)
+* **Data Visualization:** `Matplotlib`
+* **Interactive UI:** `Streamlit`
+
+## 🚀 Deployment & Local Execution
+
+1. Clone the repository:
 ```bash
-pip install -r requirements.txt
-python src/cleaner.py
+git clone [https://github.com/YOUR_USERNAME/ecg-signal-cleaner.git](https://github.com/YOUR_USERNAME/ecg-signal-cleaner.git)
+cd ecg-signal-cleaner
